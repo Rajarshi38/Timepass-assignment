@@ -9,15 +9,18 @@ const variantStyles = {
     }
   `,
   secondary: css`
-    background-color: var(--primary-marine-blue);
+    background-color: #03295a;
     color: var(--neutral-white);
     &:hover {
-      background-color: #1e40af;
+      background-color: #174a8a;
     }
   `,
   neutral: css`
     background-color: transparent;
     color: var(--neutral-cool-gray);
+    &:hover {
+      color: var(--primary-marine-blue);
+    }
   `,
 };
 
@@ -33,14 +36,14 @@ export const Button = styled.button`
   cursor: pointer;
   ${({ variant }) => variantStyles[variant] || variantStyles.primary};
   padding: ${({ size }) => sizeStyles[size] || sizeStyles.medium};
-  ${({ bgColor, variant }) =>
+  /* ${({ bgColor, variant }) =>
     bgColor && !variant && `background-color: ${bgColor};`}
-  ${({ color, variant }) => color && !variant && `color: ${color};`}
+  ${({ color, variant }) => color && !variant && `color: ${color};`} */
   border: ${({ borderColor }) =>
     borderColor ? `2px solid ${borderColor}` : "none"};
-  &:hover {
+  /* &:hover {
     background-color: ${({ hoverColor }) => hoverColor || "inherit"};
-  }
+  } */
 
   transition: background-color 0.3s ease;
 `;

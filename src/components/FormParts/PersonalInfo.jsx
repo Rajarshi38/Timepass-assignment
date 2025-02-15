@@ -23,7 +23,7 @@ const PersonalInfo = () => {
 export default PersonalInfo;
 
 const FormGroup = styled.div`
-  max-width: 300px;
+  max-width: 100%;
   margin-bottom: 20px;
 `;
 const Label = styled.label`
@@ -56,5 +56,9 @@ const Input = styled.input`
   &:focus {
     border-color: var(--primary-purplish-blue);
     outline: 0;
+  }
+
+  &:hover {
+    border-color: var(--primary-purplish-blue);
   }
 `;

@@ -2,30 +2,11 @@ import styled from "styled-components";
 import backgroundImage from "../assets/Timepass/bg-sidebar-mobile.svg";
 import Step from "./Step";
 import { Button } from "./Button";
-import { stepData } from "../constants";
-import PersonalInfo from "./FormParts/PersonalInfo";
-import SelectPlan from "./FormParts/SelectPlan";
-import AddOns from "./FormParts/AddOns";
-import Finishing from "./FormParts/Finishing";
-import ThankYou from "./FormParts/ThankYou";
+import { useFormSteps } from "../context/FormProvider";
+import MainForm from "./FormParts/MainForm";
 
-const MobileForm = ({ currentStep }) => {
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 1:
-        return <PersonalInfo />;
-      case 2:
-        return <SelectPlan />;
-      case 3:
-        return <AddOns />;
-      case 4:
-        return <Finishing />;
-      case 5:
-        return <ThankYou />;
-      default:
-        return <PersonalInfo />;
-    }
-  };
+const MobileForm = () => {
+  const { currentStep, nextStep, prevStep } = useFormSteps();
 
   return (
     <Container>
@@ -35,17 +16,17 @@ const MobileForm = ({ currentStep }) => {
             <Step key={step} step={step} active={step === currentStep} />
           ))}
         </StepsContainer>
-        <FormWrapper>
-          <FormInfo>
-            <h4>{stepData[currentStep - 1].title}</h4>
-            <p>{stepData[currentStep - 1].subtitle}</p>
-          </FormInfo>
-          {renderCurrentStep()}
-        </FormWrapper>
       </Header>
+      <AbsoluteWrapper>
+        <MainForm />
+      </AbsoluteWrapper>
       <Footer>
-        <Button variant="neutral">Go Back</Button>
-        <Button variant="secondary">Next Step</Button>
+        <Button type="button" variant="neutral" onClick={prevStep}>
+          Go Back
+        </Button>
+        <Button type="button" variant="secondary" onClick={nextStep}>
+          Next Step
+        </Button>
       </Footer>
     </Container>
   );
@@ -60,15 +41,9 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
-const FormWrapper = styled.div`
-  /* position: absolute; */
-  background-color: white;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 20px;
-  height: 500px;
-  border-radius: 8px;
-  padding: 24px 18px;
+const AbsoluteWrapper = styled.div`
+  margin-top: -120px;
+  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
@@ -93,18 +68,4 @@ const StepsContainer = styled.div`
   gap: 20px;
   justify-content: center;
   padding: 50px 0 0px 0;
-`;
-
-const FormInfo = styled.div`
-  h4 {
-    font-size: 26px;
-    margin-bottom: 10px;
-    color: var(--primary-marine-blue);
-  }
-  p {
-    font-size: 18px;
-    color: var(--neutral-cool-gray);
-    line-height: 30px;
-  }
-  margin-bottom: 20px;
 `;
