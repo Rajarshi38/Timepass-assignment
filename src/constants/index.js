@@ -27,8 +27,8 @@ export const planDetails = [
     icon: Arcade,
     title: "Arcade",
     price: {
-      monthly: "$9/m",
-      yearly: "$90/yr",
+      monthly: 9,
+      yearly: 90,
     },
     year_benefit: "2 months free",
   },
@@ -37,8 +37,8 @@ export const planDetails = [
     icon: Advanded,
     title: "Advanced",
     price: {
-      monthly: "$12/m",
-      yearly: "$120/yr",
+      monthly: 12,
+      yearly: 120,
     },
     year_benefit: "2 months free",
   },
@@ -47,8 +47,8 @@ export const planDetails = [
     icon: Pro,
     title: "Pro",
     price: {
-      monthly: "$15/m",
-      yearly: "$150/yr",
+      monthly: 15,
+      yearly: 150,
     },
     year_benefit: "2 months free",
   },
@@ -60,8 +60,8 @@ export const addOns = [
     type: "Online service",
     subtitle: "Access to multiplayer games",
     price: {
-      monthly: "+$1/mo",
-      yearly: "+$10/yr",
+      monthly: 1,
+      yearly: 10,
     },
   },
   {
@@ -69,8 +69,8 @@ export const addOns = [
     type: "Larger storage",
     subtitle: "Extra 1TB of cloud save",
     price: {
-      monthly: "+$2/mo",
-      yearly: "+$20/yr",
+      monthly: 2,
+      yearly: 20,
     },
   },
   {
@@ -78,8 +78,8 @@ export const addOns = [
     type: "Customizable profile",
     subtitle: "Custom theme on your profile",
     price: {
-      monthly: "+$2/mo",
-      yearly: "+$20/yr",
+      monthly: 2,
+      yearly: 20,
     },
   },
 ];

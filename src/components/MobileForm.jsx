@@ -1,19 +1,46 @@
 import styled from "styled-components";
 import backgroundImage from "../assets/Timepass/bg-sidebar-mobile.svg";
 import Step from "./Step";
-import { Button } from "./Button";
 import { ACTIONS, useFormSteps } from "../context/FormProvider";
 import MainForm from "./FormParts/MainForm";
+import Footer from "./Footer";
+import { addOns } from "../constants";
 
 const MobileForm = () => {
-  const [{ currentStep }, dispatch] = useFormSteps();
+  const [state, dispatch] = useFormSteps();
 
-  const prevStep = () => {
-    dispatch({ type: ACTIONS.PREV_STEP });
-  };
+  const { currentStep, selectedAddOns } = state;
 
   const nextStep = () => {
+    if (currentStep === 1) {
+      const errorKeys = Object.keys(state.profile).filter(
+        (key) => state.profile[key] === "" || !state.profile[key]
+      );
+
+      if (errorKeys.length > 0) {
+        errorKeys.forEach((key) => {
+          dispatch({
+            type: ACTIONS.PROFILE_ERROR,
+            payload: {
+              key,
+              value: "This field is required",
+            },
+          });
+        });
+
+        return;
+      }
+    } else if (currentStep === 3) {
+      dispatch({
+        type: ACTIONS.ADD_ON,
+        payload: Array.from(selectedAddOns).map((addOn) => addOns[addOn]),
+      });
+    }
+
     dispatch({ type: ACTIONS.NEXT_STEP });
+  };
+  const prevStep = () => {
+    dispatch({ type: ACTIONS.PREV_STEP });
   };
 
   return (
@@ -29,23 +56,11 @@ const MobileForm = () => {
           ))}
         </StepsContainer>
       </Header>
-      <AbsoluteWrapper>
+      {/* <MainForm /> */}
+      <FormWrapper>
         <MainForm />
-      </AbsoluteWrapper>
-      {currentStep <= 4 && (
-        <Footer>
-          <Button type="button" variant="neutral" onClick={prevStep}>
-            Go Back
-          </Button>
-          <Button
-            type="button"
-            variant={currentStep === 4 ? "primary" : "secondary"}
-            onClick={nextStep}
-          >
-            {currentStep === 4 ? "Confirm" : "Next Step"}
-          </Button>
-        </Footer>
-      )}
+      </FormWrapper>
+      <Footer nextStep={nextStep} prevStep={prevStep} />
     </Container>
   );
 };
@@ -58,10 +73,20 @@ const Container = styled.div`
   justify-content: space-between;
   min-height: 100vh;
 `;
+const FormWrapper = styled.div`
+  /* position: absolute; */
+  background-color: white;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: -90px;
+  min-height: 300px;
+  border-radius: 8px;
+  padding: 24px 18px;
+`;
 
 const AbsoluteWrapper = styled.div`
-  margin-top: -120px;
-  margin-bottom: 20px;
+  /* margin-top: -120px;
+  margin-bottom: 20px; */
 `;
 
 const Header = styled.div`
@@ -70,15 +95,6 @@ const Header = styled.div`
   background-position: center;
   width: 100%;
   height: 220px;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--neutral-white);
-  height: 100px;
-  padding: 0 10px 0 0;
 `;
 
 const StepsContainer = styled.div`

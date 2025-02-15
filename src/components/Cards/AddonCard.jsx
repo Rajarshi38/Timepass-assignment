@@ -7,9 +7,9 @@ export default function AddonCard({ checked, details, onSelect }) {
 
   const showPrice = () => {
     if (state.isYearly) {
-      return price.yearly;
+      return `+$${price.yearly}/yr`;
     }
-    return price.monthly;
+    return `+$${price.monthly}/mo`;
   };
   return (
     <Card active={checked} onClick={onSelect}>

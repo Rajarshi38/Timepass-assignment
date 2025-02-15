@@ -1,31 +1,59 @@
 import styled from "styled-components";
+import { ACTIONS, useFormSteps } from "../../context/FormProvider";
 
 const Summary = () => {
+  const [state, dispatch] = useFormSteps();
+  const { addOns, plan } = state;
+
+  const showPrice = (price, add = true) => {
+    if (state.isYearly) {
+      return `${add ? "+" : ""}$${price.yearly}/yr`;
+    }
+    return `${add ? "+" : ""}$${price.monthly}/mo`;
+  };
+
+  const showTotalPrice = () => {
+    let planPrice;
+    let addOnPrice;
+    if (state.isYearly) {
+      planPrice = plan.price.yearly;
+      addOnPrice = addOns.reduce((prev, curr) => prev + curr.price.yearly, 0);
+      let totalPrice = planPrice + addOnPrice;
+      return `$${totalPrice}/yr`;
+    }
+    planPrice = plan.price.monthly;
+    addOnPrice = addOns.reduce((prev, curr) => prev + curr.price.monthly, 0);
+    let totalPrice = planPrice + addOnPrice;
+    return `$${totalPrice}/mo`;
+  };
+
   return (
     <div>
       <SummaryCard>
         <Plan>
           <div>
-            <h4>Arcade (Monthly)</h4>
-            <ChangeLink>Change</ChangeLink>
+            <h4>{plan.title}</h4>
+            <ChangeLink
+              onClick={() => dispatch({ type: ACTIONS.GOTO_STEP, payload: 2 })}
+            >
+              Change
+            </ChangeLink>
           </div>
-          <span>$9/mo</span>
+          <span>{showPrice(plan.price, false)}</span>
         </Plan>
-        <hr />
+        <Line />
         <AddOnsWrapper>
-          <AddOn>
-            <span>Online service</span>
-            <AddOnPrice>+$1/mo</AddOnPrice>
-          </AddOn>
-          <AddOn>
-            <span>Larger storage</span>
-            <AddOnPrice>+$2/mo</AddOnPrice>
-          </AddOn>
+          {addOns.map((addOn) => (
+            <AddOn key={addOn.id}>
+              <span>{addOn.type}</span>
+              <AddOnPrice>{showPrice(addOn.price)}</AddOnPrice>
+            </AddOn>
+          ))}
         </AddOnsWrapper>
       </SummaryCard>
       <Total>
         <span>Total (per month)</span>
-        <span>+$12/mo</span>
+        <span>{showTotalPrice()}</span>
       </Total>
     </div>
   );
@@ -36,7 +64,7 @@ const SummaryCard = styled.div`
   background-color: var(--neutral-magnolia);
   border-radius: 10px;
   padding: 20px;
-  width: 300px;
+  width: 100%;
   color: #1f2937;
 `;
 
@@ -45,6 +73,12 @@ const AddOnsWrapper = styled.div`
   flex-direction: column;
   gap: 14px;
   margin-top: 14px;
+`;
+
+const Line = styled.hr`
+  border: none;
+  height: 1px;
+  background-color: var(--neutral-light-gray);
 `;
 
 const Plan = styled.div`

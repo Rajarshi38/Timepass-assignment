@@ -1,22 +1,13 @@
 import styled from "styled-components";
 import { addOns } from "../../constants";
 import AddonCard from "../Cards/AddonCard";
-import { useState } from "react";
+import { ACTIONS, useFormSteps } from "../../context/FormProvider";
 
 const AddOns = () => {
-  const [selectedAddOn, setSelectedAddOn] = useState(new Set());
-
+  const [state, dispatch] = useFormSteps();
   const onSelect = (idx) => {
     return function () {
-      setSelectedAddOn((prev) => {
-        const newSet = new Set(prev);
-        if (newSet.has(idx)) {
-          newSet.delete(idx);
-        } else {
-          newSet.add(idx);
-        }
-        return newSet;
-      });
+      dispatch({ type: ACTIONS.TEMP_ADD_ON, payload: idx });
     };
   };
 
@@ -27,7 +18,7 @@ const AddOns = () => {
           details={addOn}
           key={addOn.id}
           onSelect={onSelect(idx)}
-          checked={selectedAddOn.has(idx)}
+          checked={state.selectedAddOns.has(idx)}
         />
       ))}
     </AddOnContainer>

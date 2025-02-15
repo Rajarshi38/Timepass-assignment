@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { planDetails } from "../../constants";
 import PlanCard from "../Cards/PlanCard";
 import { useState } from "react";
-// import Switch from "react-switch";i
 import Switch from "../Switch";
 import { ACTIONS, useFormSteps } from "../../context/FormProvider";
 
@@ -12,6 +11,16 @@ const SelectPlan = () => {
 
   const onSwitch = () => {
     dispatch({ type: ACTIONS.YEARLY });
+    dispatch({ type: ACTIONS.PLAN, payload: null });
+    dispatch({ type: ACTIONS.RESET_ADD_ON });
+    setCurrentPlan(-1);
+  };
+
+  const onSelect = (idx) => {
+    return function () {
+      setCurrentPlan(idx);
+      dispatch({ type: ACTIONS.PLAN, payload: planDetails[idx] });
+    };
   };
 
   return (
@@ -22,7 +31,7 @@ const SelectPlan = () => {
             details={plan}
             key={plan.id}
             active={currentPlan === idx}
-            onSelect={() => setCurrentPlan(idx)}
+            onSelect={onSelect(idx)}
           />
         ))}
       </PlanContainer>

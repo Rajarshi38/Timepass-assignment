@@ -26,7 +26,7 @@ export default function MainForm() {
     }
   };
   return (
-    <FormWrapper>
+    <>
       {currentStep < 5 && (
         <FormInfo>
           <h4>{stepData[currentStep - 1].title}</h4>
@@ -34,20 +34,9 @@ export default function MainForm() {
         </FormInfo>
       )}
       {renderCurrentStep()}
-    </FormWrapper>
+    </>
   );
 }
-
-const FormWrapper = styled.div`
-  /* position: absolute; */
-  background-color: white;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 20px;
-  min-height: 300px;
-  border-radius: 8px;
-  padding: 24px 18px;
-`;
 
 const FormInfo = styled.div`
   h4 {

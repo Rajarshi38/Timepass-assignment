@@ -7,9 +7,9 @@ const PlanCard = ({ details, active, onSelect }) => {
 
   const showPrice = () => {
     if (isYearly) {
-      return price.yearly;
+      return `$${price.yearly}/yr`;
     }
-    return price.monthly;
+    return `$${price.monthly}/mo`;
   };
   return (
     <CardContainer onClick={onSelect} active={active}>
