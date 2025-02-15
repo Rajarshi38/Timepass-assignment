@@ -2,32 +2,50 @@ import styled from "styled-components";
 import backgroundImage from "../assets/Timepass/bg-sidebar-mobile.svg";
 import Step from "./Step";
 import { Button } from "./Button";
-import { useFormSteps } from "../context/FormProvider";
+import { ACTIONS, useFormSteps } from "../context/FormProvider";
 import MainForm from "./FormParts/MainForm";
 
 const MobileForm = () => {
-  const { currentStep, nextStep, prevStep } = useFormSteps();
+  const [{ currentStep }, dispatch] = useFormSteps();
+
+  const prevStep = () => {
+    dispatch({ type: ACTIONS.PREV_STEP });
+  };
+
+  const nextStep = () => {
+    dispatch({ type: ACTIONS.NEXT_STEP });
+  };
 
   return (
     <Container>
       <Header>
         <StepsContainer>
           {[1, 2, 3, 4].map((step) => (
-            <Step key={step} step={step} active={step === currentStep} />
+            <Step
+              key={step}
+              step={step}
+              active={step === currentStep || (currentStep > 4 && step === 4)}
+            />
           ))}
         </StepsContainer>
       </Header>
       <AbsoluteWrapper>
         <MainForm />
       </AbsoluteWrapper>
-      <Footer>
-        <Button type="button" variant="neutral" onClick={prevStep}>
-          Go Back
-        </Button>
-        <Button type="button" variant="secondary" onClick={nextStep}>
-          Next Step
-        </Button>
-      </Footer>
+      {currentStep <= 4 && (
+        <Footer>
+          <Button type="button" variant="neutral" onClick={prevStep}>
+            Go Back
+          </Button>
+          <Button
+            type="button"
+            variant={currentStep === 4 ? "primary" : "secondary"}
+            onClick={nextStep}
+          >
+            {currentStep === 4 ? "Confirm" : "Next Step"}
+          </Button>
+        </Footer>
+      )}
     </Container>
   );
 };

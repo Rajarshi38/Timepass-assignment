@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { useFormSteps } from "../../context/FormProvider";
 import AddOns from "./AddOns";
-import Finishing from "./Finishing";
+import Summary from "./Summary";
 import PersonalInfo from "./PersonalInfo";
 import SelectPlan from "./SelectPlan";
 import ThankYou from "./ThankYou";
 import { stepData } from "../../constants";
 
 export default function MainForm() {
-  const { currentStep } = useFormSteps();
+  const [{ currentStep }] = useFormSteps();
   const renderCurrentStep = () => {
     switch (currentStep) {
       case 1:
@@ -18,7 +18,7 @@ export default function MainForm() {
       case 3:
         return <AddOns />;
       case 4:
-        return <Finishing />;
+        return <Summary />;
       case 5:
         return <ThankYou />;
       default:
@@ -27,10 +27,12 @@ export default function MainForm() {
   };
   return (
     <FormWrapper>
-      <FormInfo>
-        <h4>{stepData[currentStep - 1].title}</h4>
-        <p>{stepData[currentStep - 1].subtitle}</p>
-      </FormInfo>
+      {currentStep < 5 && (
+        <FormInfo>
+          <h4>{stepData[currentStep - 1].title}</h4>
+          <p>{stepData[currentStep - 1].subtitle}</p>
+        </FormInfo>
+      )}
       {renderCurrentStep()}
     </FormWrapper>
   );

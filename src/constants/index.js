@@ -26,21 +26,60 @@ export const planDetails = [
     id: crypto.randomUUID(),
     icon: Arcade,
     title: "Arcade",
-    price: "$90/yr",
-    yearly: "2 months free",
+    price: {
+      monthly: "$9/m",
+      yearly: "$90/yr",
+    },
+    year_benefit: "2 months free",
   },
   {
     id: crypto.randomUUID(),
     icon: Advanded,
     title: "Advanced",
-    price: "$120/yr",
-    yearly: "2 months free",
+    price: {
+      monthly: "$12/m",
+      yearly: "$120/yr",
+    },
+    year_benefit: "2 months free",
   },
   {
     id: crypto.randomUUID(),
     icon: Pro,
     title: "Pro",
-    price: "$150/yr",
-    yearly: "2 months free",
+    price: {
+      monthly: "$15/m",
+      yearly: "$150/yr",
+    },
+    year_benefit: "2 months free",
+  },
+];
+
+export const addOns = [
+  {
+    id: crypto.randomUUID(),
+    type: "Online service",
+    subtitle: "Access to multiplayer games",
+    price: {
+      monthly: "+$1/mo",
+      yearly: "+$10/yr",
+    },
+  },
+  {
+    id: crypto.randomUUID(),
+    type: "Larger storage",
+    subtitle: "Extra 1TB of cloud save",
+    price: {
+      monthly: "+$2/mo",
+      yearly: "+$20/yr",
+    },
+  },
+  {
+    id: crypto.randomUUID(),
+    type: "Customizable profile",
+    subtitle: "Custom theme on your profile",
+    price: {
+      monthly: "+$2/mo",
+      yearly: "+$20/yr",
+    },
   },
 ];

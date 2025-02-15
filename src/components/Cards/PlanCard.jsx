@@ -1,7 +1,16 @@
 import styled from "styled-components";
+import { useFormSteps } from "../../context/FormProvider";
 
-const PlanCard = ({ details, active, onSelect, isYearly }) => {
-  const { title, price, yearly, icon } = details;
+const PlanCard = ({ details, active, onSelect }) => {
+  const { title, price, year_benefit, icon } = details;
+  const [{ isYearly }] = useFormSteps();
+
+  const showPrice = () => {
+    if (isYearly) {
+      return price.yearly;
+    }
+    return price.monthly;
+  };
   return (
     <CardContainer onClick={onSelect} active={active}>
       <CardIcon>
@@ -10,8 +19,8 @@ const PlanCard = ({ details, active, onSelect, isYearly }) => {
       </CardIcon>
       <CardDetails>
         <PlanTitle>{title}</PlanTitle>
-        <PlanSubtitle>{price}</PlanSubtitle>
-        {isYearly && <PlanYearlyInfo>{yearly}</PlanYearlyInfo>}
+        <PlanSubtitle>{showPrice()}</PlanSubtitle>
+        {isYearly && <PlanYearlyInfo>{year_benefit}</PlanYearlyInfo>}
       </CardDetails>
     </CardContainer>
   );

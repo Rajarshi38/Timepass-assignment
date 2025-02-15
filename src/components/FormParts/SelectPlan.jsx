@@ -4,12 +4,15 @@ import PlanCard from "../Cards/PlanCard";
 import { useState } from "react";
 // import Switch from "react-switch";i
 import Switch from "../Switch";
+import { ACTIONS, useFormSteps } from "../../context/FormProvider";
 
 const SelectPlan = () => {
   const [currentPlan, setCurrentPlan] = useState(-1);
-  const [isYearly, setIsYearly] = useState(false);
+  const [state, dispatch] = useFormSteps();
 
-  const onSwitch = () => setIsYearly((prev) => !prev);
+  const onSwitch = () => {
+    dispatch({ type: ACTIONS.YEARLY });
+  };
 
   return (
     <div>
@@ -20,13 +23,12 @@ const SelectPlan = () => {
             key={plan.id}
             active={currentPlan === idx}
             onSelect={() => setCurrentPlan(idx)}
-            isYearly={isYearly}
           />
         ))}
       </PlanContainer>
       <SwitchWrapper>
         <p>Monthly</p>
-        <Switch isOn={isYearly} onClick={onSwitch} />
+        <Switch isOn={state.isYearly} onClick={onSwitch} />
         <p>Yearly</p>
       </SwitchWrapper>
     </div>

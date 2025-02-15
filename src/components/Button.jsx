@@ -5,7 +5,7 @@ const variantStyles = {
     background-color: var(--primary-purplish-blue);
     color: var(--neutral-white);
     &:hover {
-      background-color: #4338ca;
+      background-color: var(--primary-pastel-blue);
     }
   `,
   secondary: css`
