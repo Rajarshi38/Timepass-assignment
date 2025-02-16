@@ -10,14 +10,6 @@ export default function MobileFooter({ prevStep, nextStep }) {
       {currentStep <= 4 && (
         <FooterContainer>
           <Button
-            size="small"
-            type="button"
-            variant="neutral"
-            onClick={prevStep}
-          >
-            Go Back
-          </Button>
-          <Button
             type="button"
             size="small"
             variant={currentStep === 4 ? "primary" : "secondary"}
@@ -25,6 +17,16 @@ export default function MobileFooter({ prevStep, nextStep }) {
           >
             {currentStep === 4 ? "Confirm" : "Next Step"}
           </Button>
+          {currentStep > 1 && (
+            <Button
+              size="small"
+              type="button"
+              variant="neutral"
+              onClick={prevStep}
+            >
+              Go Back
+            </Button>
+          )}
         </FooterContainer>
       )}
     </>
@@ -33,6 +35,7 @@ export default function MobileFooter({ prevStep, nextStep }) {
 
 const FooterContainer = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   background-color: var(--neutral-white);

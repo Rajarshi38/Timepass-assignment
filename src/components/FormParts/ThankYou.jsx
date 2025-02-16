@@ -29,6 +29,10 @@ const Container = styled.div`
   align-items: center;
   gap: 10px;
 
+  @media (min-width: 768px) {
+    height: 80%;
+  }
+
   h3 {
     color: var(--primary-marine-blue);
     font-size: 24px;

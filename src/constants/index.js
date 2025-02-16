@@ -83,3 +83,26 @@ export const addOns = [
     },
   },
 ];
+
+export const steps = [
+  {
+    id: 1,
+    step: 1,
+    title: "YOUR INFO",
+  },
+  {
+    id: 2,
+    step: 2,
+    title: "SELECT PLAN",
+  },
+  {
+    id: 3,
+    step: 3,
+    title: "ADD-ONS",
+  },
+  {
+    id: 4,
+    step: 4,
+    title: "SUMMARY",
+  },
+];
