@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import SidebarImage from "../assets/Timepass/bg-sidebar-desktop.svg";
 import { addOns, steps } from "../constants";
 import Step from "./Step";
 import MainForm from "./FormParts/MainForm";
@@ -111,7 +110,7 @@ const MainCard = styled.div`
 `;
 
 const Sidebar = styled.div`
-  background-image: url(${SidebarImage});
+  background-image: url("bg-sidebar-desktop.svg");
   height: 100%;
   flex: 0.4;
   background-size: cover;

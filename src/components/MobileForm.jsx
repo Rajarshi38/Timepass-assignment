@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import backgroundImage from "../assets/Timepass/bg-sidebar-mobile.svg";
 import Step from "./Step";
 import { ACTIONS, useFormSteps } from "../context/FormProvider";
 import MainForm from "./FormParts/MainForm";
@@ -107,7 +106,7 @@ const FormWrapper = styled.div`
 // `;
 
 const Header = styled.div`
-  background-image: url(${backgroundImage});
+  background-image: url("bg-sidebar-mobile.svg");
   background-size: cover;
   background-position: center;
   width: 100%;
