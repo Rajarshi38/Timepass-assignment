@@ -40,7 +40,7 @@ export default function MainForm() {
 
 const FormInfo = styled.div`
   h4 {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 10px;
     color: var(--primary-marine-blue);
   }

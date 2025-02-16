@@ -58,8 +58,11 @@ const SwitchWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 6px;
+  gap: 8px;
   background-color: var(--neutral-magnolia);
   border-radius: 8px;
-  padding: 16px 0;
+  padding: 10px 0;
+  p {
+    font-size: 14px;
+  }
 `;

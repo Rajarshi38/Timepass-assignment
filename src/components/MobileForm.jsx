@@ -3,7 +3,7 @@ import backgroundImage from "../assets/Timepass/bg-sidebar-mobile.svg";
 import Step from "./Step";
 import { ACTIONS, useFormSteps } from "../context/FormProvider";
 import MainForm from "./FormParts/MainForm";
-import Footer from "./Footer";
+import MobileFooter from "./MobileFooter";
 import { addOns } from "../constants";
 
 const MobileForm = () => {
@@ -60,7 +60,7 @@ const MobileForm = () => {
       <FormWrapper>
         <MainForm />
       </FormWrapper>
-      <Footer nextStep={nextStep} prevStep={prevStep} />
+      <MobileFooter nextStep={nextStep} prevStep={prevStep} />
     </Container>
   );
 };
@@ -71,23 +71,40 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  min-height: calc(100vh);
+  position: relative;
 `;
 const FormWrapper = styled.div`
   /* position: absolute; */
   background-color: white;
   width: 90%;
-  margin: 0 auto;
+  /* margin: 0 auto;
   margin-top: -90px;
+  margin-bottom: 20px; */
+  margin: auto;
   min-height: 300px;
+  max-height: calc(100vh - 80px);
   border-radius: 8px;
   padding: 24px 18px;
+  position: absolute;
+  /* left: 50%;
+  top: 0;
+  bottom: 0; */
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: height 0.3s ease;
+  overflow-y: auto;
+
+  @media (min-width: 395px) {
+    top: 18%;
+  }
 `;
 
-const AbsoluteWrapper = styled.div`
-  /* margin-top: -120px;
-  margin-bottom: 20px; */
-`;
+// const AbsoluteWrapper = styled.div`
+//   /* margin-top: -120px;
+//   margin-bottom: 20px; */
+// `;
 
 const Header = styled.div`
   background-image: url(${backgroundImage});

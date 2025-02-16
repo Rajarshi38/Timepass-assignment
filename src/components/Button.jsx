@@ -32,7 +32,7 @@ const sizeStyles = {
 
 export const Button = styled.button`
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 15px;
   cursor: pointer;
   ${({ variant }) => variantStyles[variant] || variantStyles.primary};
   padding: ${({ size }) => sizeStyles[size] || sizeStyles.medium};
